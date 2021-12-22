@@ -1,0 +1,23 @@
+@import '~antd/dist/antd.css';
+
+#root{
+  height:100%;
+}
+
+.App__layout{
+  height:100%;
+}
+
+.App__layout .logo {
+  height: 32px;
+  margin: 16px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.App__layout .site-layout-background {
+  background: #fff;
+  height:100%;
+}
+.App__layout .site-layout-background iframe{
+  border:none;
+}
