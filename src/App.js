@@ -34,7 +34,7 @@ function App({config}) {
             <div
               className="site-layout-background"
             >
-              <iframe sandbox="allow-same-origin allow-scripts allow-popups allow-forms" width={"100%"} height={"100%"} src={iframeUrl} title="dashboard" />
+              <iframe width={"100%"} height={"100%"} src={iframeUrl} title="dashboard" />
             </div>
           </Content>
           <Footer style={{ textAlign: "center" }}>
