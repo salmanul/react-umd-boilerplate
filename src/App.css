@@ -21,3 +21,17 @@
 .App__layout .site-layout-background iframe{
   border:none;
 }
+.App__modal-list{
+}
+.header__breadcrumb{
+  margin:16px;
+}
+.header__breadcrumb-item{
+  color:#fff;
+}
+.breadcrumb__seperator{
+  color:#fff;
+}
+.header__carousal .carousal__list-item{
+ 
+}
