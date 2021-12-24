@@ -42,34 +42,89 @@
     <script type="application/javascript" defer>
       //HTMLElement to render the App
       const container = document.getElementById("root");
-      // runtime config to inject inside the app 
-      const props = {
-        sider:[
+      // runtime config to inject inside the app
+      const data = {
+        buildings: [
           {
-            name:'Key1',
-            icon:''
+            name: "Building-1",
+            type:'building',
+            // icon: false, // if not provided, default icon will render
+            action: {
+              event: "onClick",
+              type: "openUrl",
+              url: "https://building-1",
+            },
+            items: [
+              {
+                type:'equipments',
+                name: "HVAC",
+                // icon: false,
+                action: {
+                  event: "onClick",
+                  type: "openUrl",
+                  url: "https://HVAC-equipements",
+                },
+                items: [
+                  {
+                    type:'sub-equipment',
+                    name: "AUH-1",
+                    description:"Lorem ipsum",
+                    icon: false,
+                    action: {
+                      event: "onClick",
+                      type: "openUrl",
+                      url: "https://AUH-1-sub-equipments",
+                    },
+                  },
+                  {
+                    type:'sub-equipment',
+                    name: "AUH-2",
+                    icon: false,
+                    action: {
+                      event: "onClick",
+                      type: "openUrl",
+                      url: "https://AUH-2-sub-equipments",
+                    },
+                    
+                  },
+                ],
+              },
+            ],
           },
-          {
-            name:'Key2',
-            icon:''
-          },
-          {
-            name:'Key3',
-            icon:''
-          }
+  
         ],
-        content:{
-          iframeUrl:'https://www.youtube.com/embed/fMfipiV_17o'
+        content: {
+        },
+      };
+
+      //Generate some random Data
+      const equips = ["Plan", 'Floor Layout', 'Vav', 'Ahu', 'Pumps Pmu']
+      const mock = {
+        type:'building',
+        name: 'Building-3',
+        items:[]
+      }
+      for(i=0; i<5;i++){
+        const equip = {
+          type:'equipments',
+          name : `${equips[Math.floor(Math.random()*(4 - 0 + 1)+ 0)]}-${i}`,
+          items:[]
         }
+        for(j=0;j<10;j++){
+          equip.items.push({
+            type:'sub-equipment',
+            name:`AUH-${i}-${j}`
+          })
+        }
+        mock.items.push(equip);
       }
-      if(window.App)
-      {
-        App.init(props, container);
-      }
-      else{
+
+
+      if (window.App) {
+        App.init({...data, buildings:[...data.buildings, mock]}, container);
+      } else {
         throw new Error("App script not initialized.");
       }
     </script>
-
   </body>
 </html>
