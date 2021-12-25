@@ -85,6 +85,11 @@ function App({ config }) {
     setCarousalSelected([item?.title || item?.name]);
   }, []);
 
+  const onHomeAction = useCallback((item)=>{
+    triggerAction(item?.action);
+    setSelectedKeys([item?.name]);
+  },[])
+
   return (
     <Layout style={{ minHeight: "100vh" }} className="App__layout">
       <Sider
@@ -112,6 +117,7 @@ function App({ config }) {
           openOnlyCurrentSubMenu={config?.openOnlyCurrentSubMenu ?? true}
           onSubMenuClick={onSubMenuClick}
           onMenuItemClick={onMenuItemClick}
+          onHomeAction={onHomeAction}
         />
         {/* <br />
         <br />
