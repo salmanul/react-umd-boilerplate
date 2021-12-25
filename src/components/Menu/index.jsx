@@ -39,10 +39,10 @@ export const Menu = ({
 
   return (
     <AntdMenu
-      theme={theme}
       onClick={onClick}
       mode="inline"
       {...(openOnlyCurrentSubMenu && { openKeys, onOpenChange })}
+      className="sider__menu"
     >
       {getMenuItems({ items: data, onSubMenuClick })}
     </AntdMenu>

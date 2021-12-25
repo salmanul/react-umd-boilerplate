@@ -10,7 +10,7 @@ import { Carousal } from "./components/Carousal";
 const { Header, Content, Footer, Sider } = Layout;
 
 function App({ config }) {
-  const [theme, setTheme] = useState("dark");
+  const [theme, setTheme] = useState("light");
   const [iframeUrl, setIframeUrl] = useState("");
   const [subEquipments, setSubEquipments] = useState([]);
   const [collapsed, setCollapsed] = useState(false);
@@ -83,6 +83,7 @@ function App({ config }) {
         collapsed={collapsed}
         theme={theme}
         onCollapse={onCollapse}
+        className="layout__sider"
       >
         <div className="logo">LOGO</div>
         <Menu

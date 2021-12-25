@@ -1,11 +1,11 @@
-@import '~antd/dist/antd.css';
+@import "~antd/dist/antd.css";
 
-#root{
-  height:100%;
+#root {
+  height: 100%;
 }
 
-.App__layout{
-  height:100%;
+.App__layout {
+  height: 100%;
 }
 
 .App__layout .logo {
@@ -16,22 +16,51 @@
 
 .App__layout .site-layout-background {
   background: #fff;
-  height:100%;
+  height: 100%;
 }
-.App__layout .site-layout-background iframe{
-  border:none;
+.App__layout .site-layout-background iframe {
+  border: none;
 }
-.App__modal-list{
+.App__layout .site-layout-sub-header-background{
+  background:white;
+  color:black;
 }
-.header__breadcrumb{
-  margin:16px;
+.App__modal-list {
 }
-.header__breadcrumb-item{
-  color:#fff;
+.header__breadcrumb {
+  margin: 16px;
 }
-.breadcrumb__seperator{
-  color:#fff;
+.header__breadcrumb-item, .breadcrumb__seperator  {
+  color: black;
 }
-.header__carousal .carousal__list-item{
- 
+.breadcrumb__seperator {
+}
+.header__carousal .carousal__list-item {
+}
+.layout__sider {
+  background: #d6cecc;
+}
+.layout__sider .sider__menu {
+  background: transparent;
+}
+.layout__sider .sider__menu .ant-menu-submenu-active .ant-menu-submenu-title .ant-menu-submenu-arrow{
+  color: dark;
+}
+.layout__sider .sider__menu .ant-menu-submenu-active .ant-menu-submenu-title:hover{
+  color:#993c44 !important;
+}
+.ant-menu-light .ant-menu-item:hover, .ant-menu-light .ant-menu-item-active, .ant-menu-light .ant-menu:not(.ant-menu-inline) .ant-menu-submenu-open, .ant-menu-light .ant-menu-submenu-active, .ant-menu-light .ant-menu-submenu-title:hover{
+  color:#993c44 !important;
+}
+.layout__sider .sider__menu .ant-menu-submenu-title:active{
+  background: transparent;
+}
+.layout__sider .sider__menu .ant-menu-submenu-active .ant-menu-submenu-title:hover > .ant-menu-submenu-arrow{
+  color:#993c44 !important;
+}
+.layout__sider .sider__menu .ant-menu-submenu-selected{
+  color:#993c44;
+}
+.layout__sider .sider__menu .ant-menu-item-selected{
+  color:#993c44;
 }

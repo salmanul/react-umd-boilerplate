@@ -96,7 +96,7 @@ export const Carousal = ({ list, onClick }) => {
       >
         <List
           size="small"
-          itemLayout="vertical"
+          itemLayout="horizontal"
           dataSource={list}
           renderItem={(item) => (
             <List.Item>
