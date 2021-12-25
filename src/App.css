@@ -53,6 +53,7 @@
   background: #f6f1f1;  
 }
 .App__modal-list {
+  max-width: 625px;
 }
 .header__breadcrumb {
   margin: 20px;
