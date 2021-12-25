@@ -108,7 +108,7 @@ function App({ config }) {
           unCheckedChildren="Dark"
         /> */}
       </Sider>
-      <Layout>
+      <Layout className="RHS_panel">
         <Header
           className="site-layout-sub-header-background"
           style={{ padding: 0 }}
