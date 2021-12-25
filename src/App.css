@@ -95,6 +95,9 @@
 .layout__sider .sider__menu .ant-menu-submenu-title:active{
   background: transparent;
 }
+.ant-menu-submenu:hover > .ant-menu-submenu-title > .ant-menu-submenu-expand-icon, .ant-menu-submenu:hover > .ant-menu-submenu-title > .ant-menu-submenu-arrow{
+  color:var(--color) !important;
+}
 .layout__sider .sider__menu .ant-menu-submenu-active .ant-menu-submenu-title:hover > .ant-menu-submenu-arrow{
   color:var(--color) !important;
 }
