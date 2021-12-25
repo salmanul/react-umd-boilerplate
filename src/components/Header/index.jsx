@@ -24,7 +24,7 @@ export const HeaderCustom = ({ breadCrumb, actions = [], onActionClick }) => {
           )}
           {item?.type === "button" && (
             <Tooltip key={item?.name} title={item?.name}>
-              <Button onClick={onClick(item)} icon={<Icon url={item?.icon} />} type="link" />
+              <Button onClick={onClick(item)} icon={<Icon width={24} height={24} url={item?.icon} />} type="link" />
             </Tooltip>
           )}
         </>
@@ -39,7 +39,7 @@ export const HeaderCustom = ({ breadCrumb, actions = [], onActionClick }) => {
       <Row align="center">
         <Col flex="1 1 auto">{breadCrumb}</Col>
         <Col>
-          <Space split={<Divider type="vertical" />} className="header__space">
+          <Space split={<Divider type="vertical" />} align="center" className="header__space">
             {actionItems}
           </Space>
         </Col>

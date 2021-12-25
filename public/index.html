@@ -45,10 +45,10 @@
       // runtime config to inject inside the app
       const data = {
         sider: [
-        {
+          {
             name: "Home",
-            type:'home',  // in order to set default landing page , type should be equal to 'home' and name equal to 'Home'
-            icon: './icons/home.svg', // if not provided, default icon will render
+            type: "home", // in order to set default landing page , type should be equal to 'home' and name equal to 'Home'
+            icon: "./icons/home.svg", // if not provided, default icon will render
             action: {
               event: "onClick",
               type: "openUrl",
@@ -57,8 +57,8 @@
           },
           {
             name: "Building-1",
-            type:'building',
-            icon: './icons/building.svg', // if not provided, default icon will render
+            type: "building",
+            icon: "./icons/building.svg", // if not provided, default icon will render
             action: {
               event: "onClick",
               type: "openUrl",
@@ -66,9 +66,9 @@
             },
             items: [
               {
-                type:'equipments',
+                type: "equipments",
                 name: "HVAC",
-                icon: './icons/energy.svg',
+                icon: "./icons/energy.svg",
                 action: {
                   event: "onClick",
                   type: "openUrl",
@@ -76,10 +76,10 @@
                 },
                 items: [
                   {
-                    type:'sub-equipment',
+                    type: "sub-equipment",
                     name: "AUH-1",
-                    description:"Lorem ipsum",
-                    icon: './icons/ahu.svg',
+                    description: "Lorem ipsum",
+                    icon: "./icons/ahu.svg",
                     action: {
                       event: "onClick",
                       type: "openUrl",
@@ -87,7 +87,7 @@
                     },
                   },
                   {
-                    type:'sub-equipment',
+                    type: "sub-equipment",
                     name: "AUH-2",
                     icon: false,
                     action: {
@@ -95,40 +95,60 @@
                       type: "openUrl",
                       url: "https://AUH-2-sub-equipments",
                     },
-                    
                   },
                 ],
               },
             ],
           },
-          
         ],
-        content: {
-        },
-        footerText:"Powered by DOTS Tech Systems LLC",
-        openOnlyCurrentSubMenu:true,
-        header:[
+        content: {},
+        footerText: "Powered by DOTS Tech Systems LLC",
+        openOnlyCurrentSubMenu: true,
+        header: [
           {
-            name:"Home",
-            type:"button",
-            icon:false,
-            action:{
+            name: "Home",
+            type: "button",
+            icon: false,
+            action: {
               event: "onClick",
               type: "openUrl",
               url: "https://home",
-            }
+            },
           },
           {
-            name:"Logout",
-            type:"text",
-            text:"Logout",
-            action:{
+            name: "Report",
+            type: "button",
+            icon: "./icons/report.svg",
+            action: {
+              event: "onClick",
+              type: "openUrl",
+              url: "https://energy",
+            },
+          },
+          {
+            name: "Energy",
+            type: "button",
+            icon: "./icons/energy.svg",
+            action: {
+              event: "onClick",
+              type: "openUrl",
+              url: "https://energy",
+            },
+          },
+
+          {
+            name: "Logout",
+            type: "text",
+            text: "Logout",
+            action: {
               event: "onClick",
               type: "callbackFunction",
-              callback: ()=>{console.log('Callback from Logout..')},
-            }
-          }
-        ]
+              callback: () => {
+                console.log("Callback from Logout..");
+              },
+            },
+          },
+        ],
       };
 
       //Generate some random Data
@@ -152,7 +172,6 @@
       //   }
       //   mock.items.push(equip);
       // }
-
 
       if (window.App) {
         App.init(data, container);
