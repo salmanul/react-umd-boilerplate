@@ -2,6 +2,7 @@
 
 #root {
   height: 100%;
+  --color:#993c44;
 }
 
 .App__layout {
@@ -29,6 +30,9 @@
 }
 .header__breadcrumb {
   margin: 16px;
+}
+.header__breadcrumb:last-child(){
+  color:
 }
 .header__breadcrumb-item, .breadcrumb__seperator  {
   color: black;
@@ -63,4 +67,11 @@
 }
 .layout__sider .sider__menu .ant-menu-item-selected{
   color:#993c44;
+  background:white;
+}
+.layout__sider .sider__menu .ant-menu-item-selected::after{
+  opacity:0;
+}
+.layout__sider .sider__menu .ant-menu-sub.ant-menu-inline{
+  background: transparent;
 }
