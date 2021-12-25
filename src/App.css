@@ -9,10 +9,16 @@
   height: 100%;
 }
 
+/* Logo Container */
+.App__layout .logocontainer{
+  display: flex;
+  justify-content: center;
+
+}
+
 .App__layout .logo {
-  height: 32px;
-  margin: 16px;
-  background: rgba(255, 255, 255, 0.3);
+  padding:10px;
+  width: 100%;
 }
 
 .App__layout .site-layout-background {
@@ -75,3 +81,4 @@
 .layout__sider .sider__menu .ant-menu-sub.ant-menu-inline{
   background: transparent;
 }
+
