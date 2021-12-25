@@ -48,7 +48,7 @@
           {
             name: "Building-1",
             type:'building',
-            // icon: false, // if not provided, default icon will render
+            icon: './icons/report.svg', // if not provided, default icon will render
             action: {
               event: "onClick",
               type: "openUrl",
@@ -58,7 +58,7 @@
               {
                 type:'equipments',
                 name: "HVAC",
-                // icon: false,
+                icon: './icons/energy.svg',
                 action: {
                   event: "onClick",
                   type: "openUrl",
@@ -69,7 +69,7 @@
                     type:'sub-equipment',
                     name: "AUH-1",
                     description:"Lorem ipsum",
-                    icon: false,
+                    icon: './icons/ahu.svg',
                     action: {
                       event: "onClick",
                       type: "openUrl",
@@ -91,7 +91,16 @@
               },
             ],
           },
-  
+          {
+            name: "Home",
+            type:'home',
+            icon: './icons/report.svg', // if not provided, default icon will render
+            action: {
+              event: "onClick",
+              type: "openUrl",
+              url: "https://building-1",
+            },
+          }
         ],
         content: {
         },

@@ -2,6 +2,7 @@ import React, { useState, useCallback } from "react";
 import { List, Avatar, Space, Button, Col, Row, Modal } from "antd";
  
 import { DownloadOutlined } from "@ant-design/icons";
+import { Icon } from "../Icon";
 
 const mapToCarousalModel = (equipments = []) =>
   equipments.map((item) => ({
@@ -87,10 +88,10 @@ export const Carousal = ({ list, onClick }) => {
         footer={null}
         visible={isVisible}
         className="App__modal-list"
-        width={"60%"}
+        width={"80%"}
         bodyStyle={{
           height:"50vh",
-          maxHeight:400,
+          maxHeight:450,
           minHeight:250,
           overflowY:'auto'
         }
@@ -112,7 +113,7 @@ export const Carousal = ({ list, onClick }) => {
           }}
           renderItem={(item) => (
             <List.Item>
-              <Button size="large" icon={<DownloadOutlined />} onClick={onListItemClick(item)}>
+              <Button size="large" icon={<Icon url={item?.icon} />} onClick={onListItemClick(item)}>
                 {item?.name}
               </Button>
             </List.Item>

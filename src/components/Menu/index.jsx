@@ -5,6 +5,7 @@ import {
   UserOutlined,
   VideoCameraOutlined,
 } from "@ant-design/icons";
+import { Icon } from "../Icon";
 const { SubMenu } = AntdMenu;
 
 const isLastItem = (item = {}) => (item["items"] ? false : true);
@@ -60,6 +61,7 @@ const getMenuItems = ({ items, onSubMenuClick, name='' }) => {
         items.map((item) =>
           isLastItem(item) ? (
             <AntdMenu.Item
+              icon={<Icon url={item?.icon} />}
               extraProps={item}
               key={getCombinedKeys([name, item?.name])}
             >
@@ -69,7 +71,7 @@ const getMenuItems = ({ items, onSubMenuClick, name='' }) => {
             <SubMenu
               onTitleClick={onTitleClick(item)}
               key={getCombinedKeys([name, item?.name])}
-              icon={item?.icon ?? <UploadOutlined />}
+              icon={<Icon url={item?.icon} />}
               title={item?.name}
             >
               {getMenuItems({
