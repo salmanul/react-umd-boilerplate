@@ -111,7 +111,10 @@ function App({ config }) {
     triggerAction(item?.action, e, item);
     if(item?.action?.type === 'openUrl'){
       setSelectedKeys([item?.name]);  //update breadcrumb
+      setCarousalSelected([]);  //clear selected carousal
       setOpenKeys([item?.name]); // update menu openKeys for sub menu
+      //Clear equipments list
+      setSubEquipments([]);
     }
   },[])
 
