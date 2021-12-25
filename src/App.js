@@ -1,11 +1,12 @@
 import "./App.css";
-import { Breadcrumb, Layout, Switch } from "antd";
+import { Breadcrumb, Layout, Switch, Row , Col} from "antd";
 import { RightOutlined } from "@ant-design/icons";
 
 import { Menu } from "./components/Menu";
 import { useCallback, useState } from "react";
 import { IFrame } from "./components/IFrame";
 import { Carousal } from "./components/Carousal";
+import Logo from "./images/logo.png"
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -85,7 +86,12 @@ function App({ config }) {
         onCollapse={onCollapse}
         className="layout__sider"
       >
-        <div className="logo">LOGO</div>
+        <Row className="logocontainer" >
+          <Col>
+        <div className="logo">
+          <img src={Logo} width={'100%'} style={{textAlign:"center"}}></img></div>
+          </Col>
+          </Row>
         <Menu
           theme={theme}
           data={buildings}
