@@ -65,8 +65,11 @@
   float: right;
   padding: 0px 1rem;
 }
-.header__space .header__logout{
+.header__space .header__action-text{
   color: var(--color);
+}
+.header__space .header__action-text:hover{
+  color: var(--color)
 }
 /* .header__breadcrumb-item, .breadcrumb__seperator  {
   color: black;

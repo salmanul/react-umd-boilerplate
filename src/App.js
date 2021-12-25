@@ -10,15 +10,16 @@ import {
   Col,
   Divider,
 } from "antd";
-import { RightOutlined, SearchOutlined, HomeOutlined } from "@ant-design/icons";
+import { RightOutlined } from "@ant-design/icons";
 
-import { Menu } from "./components/Menu";
+import { Menu , createTreeFromString} from "./components/Menu";
 import { useCallback, useState } from "react";
 import { IFrame } from "./components/IFrame";
 import { Carousal } from "./components/Carousal";
+import { HeaderCustom } from "./components/Header";
 import Logo from "./images/logo.png";
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Content, Footer, Sider } = Layout;
 
 function App({ config }) {
   const [theme, setTheme] = useState("light");
@@ -27,8 +28,15 @@ function App({ config }) {
   const [collapsed, setCollapsed] = useState(false);
   const [selectedKeys, setSelectedKeys] = useState([""]);
   const [carousalSelected, setCarousalSelected] = useState([""]);
+  const [openKeys, setOpenKeys] = useState([]);
+  const defaultSelectedKeys = ["Home"]
 
-  const { buildings, footerText } = config; //config from App.init
+  const onOpenChange = (keys) => {
+    const latestOpenKey = keys.find((key) => openKeys.indexOf(key) === -1);
+    setOpenKeys(latestOpenKey ? createTreeFromString(latestOpenKey) : keys);
+  };
+
+  const { sider, footerText, header } = config; //config from App.init
 
   const onSubMenuClick = useCallback((e, item) => {
     const { key } = e;
@@ -44,13 +52,22 @@ function App({ config }) {
     } else setSubEquipments([]);
   }, []);
 
-  const triggerAction = (action) => {
+  const executeCallback = (fn, args)=>{
+    if(fn){
+      fn.apply(this, args)
+    }
+  }
+
+  const triggerAction = (action, ...rest) => {
     // Trigger Action
     if (action) {
       const { type } = action;
       switch (type) {
         case "openUrl":
           setIframeUrl(action?.url);
+          break;
+        case "callbackFunction":
+          executeCallback(action?.callback, rest);
           break;
         //TODO: add further actions here
         default:
@@ -85,9 +102,17 @@ function App({ config }) {
     setCarousalSelected([item?.title || item?.name]);
   }, []);
 
-  const onHomeAction = useCallback((item)=>{
+  const onHomeAction = useCallback((item) => {
     triggerAction(item?.action);
     setSelectedKeys([item?.name]);
+  }, []);
+
+  const onActionClick = useCallback((e, item)=>{
+    triggerAction(item?.action, e, item);
+    if(item?.action?.type === 'openUrl'){
+      setSelectedKeys([item?.name]);  //update breadcrumb
+      setOpenKeys([item?.name]); // update menu openKeys for sub menu
+    }
   },[])
 
   return (
@@ -113,8 +138,11 @@ function App({ config }) {
         </Row>
         <Menu
           theme={theme}
-          data={buildings}
+          data={sider}
           openOnlyCurrentSubMenu={config?.openOnlyCurrentSubMenu ?? true}
+          defaultSelectedKeys={defaultSelectedKeys}
+          openKeys={openKeys}
+          onOpenChange={onOpenChange}
           onSubMenuClick={onSubMenuClick}
           onMenuItemClick={onMenuItemClick}
           onHomeAction={onHomeAction}
@@ -129,42 +157,22 @@ function App({ config }) {
         /> */}
       </Sider>
       <Layout className="RHS_panel">
-        <Header
-          className="site-layout-sub-header-background"
-          style={{ padding: 0 }}
-        >
-          <Row align="center">
-            <Col flex="1 1 auto">
-              <Breadcrumb
-                separator={<RightOutlined className="breadcrumb__seperator" />}
-                className="header__breadcrumb"
-              >
-                {[...selectedKeys, ...carousalSelected].map((path) => (
-                  <Breadcrumb.Item className="header__breadcrumb-item">
-                    {path}
-                  </Breadcrumb.Item>
-                ))}
-              </Breadcrumb>
-            </Col>
-            <Col>
-              <Space
-                split={<Divider type="vertical" />}
-                className="header__space"
-              >
-                <Tooltip title="Home">
-                  <HomeOutlined />
-                </Tooltip>
-                <Tooltip title="Search">
-                  <SearchOutlined />
-                </Tooltip>
-
-                <Typography.Link className="header__logout">
-                  Logout
-                </Typography.Link>
-              </Space>
-            </Col>
-          </Row>
-        </Header>
+        <HeaderCustom
+          breadCrumb={
+            <Breadcrumb
+              separator={<RightOutlined className="breadcrumb__seperator" />}
+              className="header__breadcrumb"
+            >
+              {[...selectedKeys, ...carousalSelected].map((path) => (
+                <Breadcrumb.Item className="header__breadcrumb-item">
+                  {path}
+                </Breadcrumb.Item>
+              ))}
+            </Breadcrumb>
+          }
+          actions={header}
+          onActionClick={onActionClick}
+        />
 
         <Content className="layout__content">
           {subEquipments && subEquipments.length > 0 && (

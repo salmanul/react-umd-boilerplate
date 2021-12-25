@@ -12,7 +12,7 @@ const isLastItem = (item = {}) => (item["items"] ? false : true);
 const getCombinedKeys = (names = []) => names.filter(name => name).join(",");
 const getHomeItem = (items=[]) => items.find(x=>x["type"] === "home");
 
-const createTreeFromString = (key = "") => {
+export const createTreeFromString = (key = "") => {
   if (key) {
     const keys = key.split(",");
     return keys.reduce((acc = [], cur) => {
@@ -26,16 +26,14 @@ export const Menu = ({
   data = [],
   theme,
   openOnlyCurrentSubMenu,
+  defaultSelectedKeys,
+  openKeys,
+  onOpenChange,
   onSubMenuClick,
   onMenuItemClick,
   onHomeAction
 }) => {
-  const [openKeys, setOpenKeys] = useState([]);
-  const defaultSelectedKeys = ["Home"]
-  const onOpenChange = (keys) => {
-    const latestOpenKey = keys.find((key) => openKeys.indexOf(key) === -1);
-    setOpenKeys(latestOpenKey ? createTreeFromString(latestOpenKey) : keys);
-  };
+  
   const onClick = (e) => {
     const { key, item } = e;
     const { extraProps } = item.props;

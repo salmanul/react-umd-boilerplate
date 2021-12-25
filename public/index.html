@@ -44,7 +44,7 @@
       const container = document.getElementById("root");
       // runtime config to inject inside the app
       const data = {
-        buildings: [
+        sider: [
         {
             name: "Home",
             type:'home',  // in order to set default landing page , type should be equal to 'home' and name equal to 'Home'
@@ -106,7 +106,29 @@
         content: {
         },
         footerText:"Powered by DOTS Tech Systems LLC",
-        openOnlyCurrentSubMenu:true
+        openOnlyCurrentSubMenu:true,
+        header:[
+          {
+            name:"Home",
+            type:"button",
+            icon:false,
+            action:{
+              event: "onClick",
+              type: "openUrl",
+              url: "https://home",
+            }
+          },
+          {
+            name:"Logout",
+            type:"text",
+            text:"Logout",
+            action:{
+              event: "onClick",
+              type: "callbackFunction",
+              callback: ()=>{console.log('Callback from Logout..')},
+            }
+          }
+        ]
       };
 
       //Generate some random Data
@@ -135,7 +157,7 @@
       if (window.App) {
         App.init(data, container);
         //Mock data for development purpose
-        // App.init({...data, buildings:[...data.buildings, mock]}, container);
+        // App.init({...data, sider:[...data.sider, mock]}, container);
       } else {
         throw new Error("App script not initialized.");
       }
