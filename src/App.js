@@ -16,6 +16,7 @@ function App({ config }) {
   const [collapsed, setCollapsed] = useState(false);
   const [selectedKeys, setSelectedKeys] = useState([""]);
   const [carousalSelected, setCarousalSelected] = useState([""]);
+  
 
   const { buildings, footerText } = config; //config from App.init
 
@@ -87,6 +88,7 @@ function App({ config }) {
         <Menu
           theme={theme}
           data={buildings}
+          openOnlyCurrentSubMenu={config?.openOnlyCurrentSubMenu ?? true}
           onSubMenuClick={onSubMenuClick}
           onMenuItemClick={onMenuItemClick}
         />

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Menu as AntdMenu } from "antd";
 import {
   UploadOutlined,
@@ -8,8 +8,29 @@ import {
 const { SubMenu } = AntdMenu;
 
 const isLastItem = (item = {}) => (item["items"] ? false : true);
+const getCombinedKeys = (names = []) => names.filter((name) => name).join(",");
+const createTreeFromString = (key = "") => {
+  if (key) {
+    const keys = key.split(",");
+    return keys.reduce((acc = [], cur) => {
+      acc.push([...acc, cur].join(","));
+      return acc;
+    }, []);
+  }
+};
 
-export const Menu = ({ data = [], theme, onSubMenuClick, onMenuItemClick }) => {
+export const Menu = ({
+  data = [],
+  theme,
+  openOnlyCurrentSubMenu,
+  onSubMenuClick,
+  onMenuItemClick,
+}) => {
+  const [openKeys, setOpenKeys] = useState([]);
+  const onOpenChange = (keys) => {
+    const latestOpenKey = keys.find((key) => openKeys.indexOf(key) === -1);
+    setOpenKeys(latestOpenKey ? createTreeFromString(latestOpenKey) : keys);
+  };
   const onClick = (e) => {
     const { key, item } = e;
     const { extraProps } = item.props;
@@ -17,7 +38,12 @@ export const Menu = ({ data = [], theme, onSubMenuClick, onMenuItemClick }) => {
   };
 
   return (
-    <AntdMenu theme={theme} onClick={onClick} mode="inline">
+    <AntdMenu
+      theme={theme}
+      onClick={onClick}
+      mode="inline"
+      {...(openOnlyCurrentSubMenu && { openKeys, onOpenChange })}
+    >
       {getMenuItems({ items: data, onSubMenuClick })}
     </AntdMenu>
   );
@@ -33,20 +59,23 @@ const getMenuItems = ({ items, onSubMenuClick, name }) => {
       {items &&
         items.map((item) =>
           isLastItem(item) ? (
-            <AntdMenu.Item extraProps={item} key={name ? `${name},${item?.name}` : item?.name}>
+            <AntdMenu.Item
+              extraProps={item}
+              key={getCombinedKeys([name, item?.name])}
+            >
               {item?.["name"]}
             </AntdMenu.Item>
           ) : (
             <SubMenu
               onTitleClick={onTitleClick(item)}
-              key={name ? `${name},${item?.name}` : item?.name}
+              key={getCombinedKeys([name, item?.name])}
               icon={item?.icon ?? <UploadOutlined />}
               title={item?.name}
             >
               {getMenuItems({
                 items: [...item?.["items"]],
                 onSubMenuClick,
-                name: name ? `${name},${item?.name}` : item?.name,
+                name: getCombinedKeys([name, item?.name]),
               })}
             </SubMenu>
           )
