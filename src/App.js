@@ -1,12 +1,22 @@
 import "./App.css";
-import { Breadcrumb, Layout, Switch, Row , Col} from "antd";
-import { RightOutlined } from "@ant-design/icons";
+import {
+  Breadcrumb,
+  Layout,
+  Space,
+  Tooltip,
+  Button,
+  Typography,
+  Row,
+  Col,
+  Divider,
+} from "antd";
+import { RightOutlined, SearchOutlined, HomeOutlined } from "@ant-design/icons";
 
 import { Menu } from "./components/Menu";
 import { useCallback, useState } from "react";
 import { IFrame } from "./components/IFrame";
 import { Carousal } from "./components/Carousal";
-import Logo from "./images/logo.png"
+import Logo from "./images/logo.png";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -17,7 +27,6 @@ function App({ config }) {
   const [collapsed, setCollapsed] = useState(false);
   const [selectedKeys, setSelectedKeys] = useState([""]);
   const [carousalSelected, setCarousalSelected] = useState([""]);
-  
 
   const { buildings, footerText } = config; //config from App.init
 
@@ -26,7 +35,7 @@ function App({ config }) {
     console.log(key);
     //Update Breadcrumbs
     setSelectedKeys(key.split(","));
-    setCarousalSelected([])
+    setCarousalSelected([]);
     //Trigger action if exist for the item
     triggerAction(item?.action);
     // Set all sub-equipements list if type equals equipments
@@ -54,7 +63,7 @@ function App({ config }) {
     console.log("onMenuItemClick", key, item);
     //Update Breadcrumbs
     setSelectedKeys(key.split(","));
-    setCarousalSelected([])
+    setCarousalSelected([]);
     //Trigger action if exist for the item
     triggerAction(item?.action);
     //Clear equipments list
@@ -73,7 +82,7 @@ function App({ config }) {
     e.preventDefault();
     triggerAction(item?.action);
     //Update breadcrumb
-    setCarousalSelected([(item?.title || item?.name)])
+    setCarousalSelected([item?.title || item?.name]);
   }, []);
 
   return (
@@ -86,12 +95,17 @@ function App({ config }) {
         onCollapse={onCollapse}
         className="layout__sider"
       >
-        <Row className="logocontainer" >
+        <Row className="logocontainer">
           <Col>
-        <div className="logo">
-          <img src={Logo} width={'100%'} style={{textAlign:"center"}}></img></div>
+            <div className="logo">
+              <img
+                src={Logo}
+                width={"100%"}
+                style={{ textAlign: "center" }}
+              ></img>
+            </div>
           </Col>
-          </Row>
+        </Row>
         <Menu
           theme={theme}
           data={buildings}
@@ -113,19 +127,40 @@ function App({ config }) {
           className="site-layout-sub-header-background"
           style={{ padding: 0 }}
         >
-          <Breadcrumb
-            separator={<RightOutlined className="breadcrumb__seperator" />}
-            className="header__breadcrumb"
-          >
-            {[...selectedKeys, ...carousalSelected].map((path) => (
-              <Breadcrumb.Item className="header__breadcrumb-item">
-                {path}
-              </Breadcrumb.Item>
-            ))}
-          </Breadcrumb>
+          <Row align="center">
+            <Col flex="1 1 auto">
+              <Breadcrumb
+                separator={<RightOutlined className="breadcrumb__seperator" />}
+                className="header__breadcrumb"
+              >
+                {[...selectedKeys, ...carousalSelected].map((path) => (
+                  <Breadcrumb.Item className="header__breadcrumb-item">
+                    {path}
+                  </Breadcrumb.Item>
+                ))}
+              </Breadcrumb>
+            </Col>
+            <Col>
+              <Space
+                split={<Divider type="vertical" />}
+                className="header__space"
+              >
+                <Tooltip title="Home">
+                  <HomeOutlined />
+                </Tooltip>
+                <Tooltip title="Search">
+                  <SearchOutlined />
+                </Tooltip>
+
+                <Typography.Link className="header__logout">
+                  Logout
+                </Typography.Link>
+              </Space>
+            </Col>
+          </Row>
         </Header>
 
-        <Content>
+        <Content className="layout__content">
           {subEquipments && subEquipments.length > 0 && (
             <Carousal list={subEquipments} onClick={onCarousalItemClick} />
           )}

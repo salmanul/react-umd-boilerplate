@@ -8,7 +8,7 @@ import {
 const { SubMenu } = AntdMenu;
 
 const isLastItem = (item = {}) => (item["items"] ? false : true);
-const getCombinedKeys = (names = []) => names.filter((name) => name).join(",");
+const getCombinedKeys = (names = []) => names.filter(name => name).join(",");
 const createTreeFromString = (key = "") => {
   if (key) {
     const keys = key.split(",");
@@ -48,7 +48,7 @@ export const Menu = ({
     </AntdMenu>
   );
 };
-const getMenuItems = ({ items, onSubMenuClick, name }) => {
+const getMenuItems = ({ items, onSubMenuClick, name='' }) => {
   const onTitleClick =
     (item = {}) =>
     (e) => {
