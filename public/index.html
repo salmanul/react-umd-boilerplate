@@ -45,16 +45,16 @@
       // runtime config to inject inside the app
       const data = {
         sider: [
-          {
-            name: "Home",
-            type: "home", // in order to set default landing page , type should be equal to 'home' and name equal to 'Home'
-            icon: "./icons/home.svg", // if not provided, default icon will render
-            action: {
-              event: "onClick",
-              type: "openUrl",
-              url: "https://home-url-place-here",
-            },
-          },
+          // {
+          //   name: "Home",
+          //   type: "home", // in order to set default landing page , type should be equal to 'home' and name equal to 'Home'
+          //   icon: "./icons/home.svg", // if not provided, default icon will render
+          //   action: {
+          //     event: "onClick",
+          //     type: "openUrl",
+          //     url: "https://home-url-place-here",
+          //   },
+          // },
           {
             name: "Building-1",
             type: "building",
@@ -64,6 +64,8 @@
               type: "openUrl",
               url: "https://building-1",
             },
+            image:'./images/building-1.png',
+            contentHtml:"<div><h3>Zone-1 & 2</h3><ul><li>lorem ipsum</li><ul></div>",
             items: [
               {
                 type: "equipments",
@@ -101,6 +103,7 @@
             ],
           },
         ],
+        homeUrl:"https://home-url-place-here",
         content: {},
         footerText: "Powered by DOTS Tech Systems LLC",
         openOnlyCurrentSubMenu: true,
@@ -118,7 +121,7 @@
           {
             name: "Report",
             type: "button",
-            icon: "./icons/report.svg",
+            icon: "./icons/REPORT.png",
             action: {
               event: "onClick",
               type: "openUrl",
@@ -126,9 +129,9 @@
             },
           },
           {
-            name: "Energy",
+            name: "Alarm",
             type: "button",
-            icon: "./icons/energy.svg",
+            icon: "./icons/ALARM.png",
             action: {
               event: "onClick",
               type: "openUrl",
@@ -152,31 +155,31 @@
       };
 
       //Generate some random Data
-      // const equips = ["Plan", 'Floor Layout', 'Vav', 'Ahu', 'Pumps Pmu']
-      // const mock = {
-      //   type:'building',
-      //   name: 'Building-3',
-      //   items:[]
-      // }
-      // for(i=0; i<5;i++){
-      //   const equip = {
-      //     type:'equipments',
-      //     name : `${equips[Math.floor(Math.random()*(4 - 0 + 1)+ 0)]}-${i}`,
-      //     items:[]
-      //   }
-      //   for(j=0;j<10;j++){
-      //     equip.items.push({
-      //       type:'sub-equipment',
-      //       name:`AUH-${i}-${j}`
-      //     })
-      //   }
-      //   mock.items.push(equip);
-      // }
+      const equips = ["Plan", 'Floor Layout', 'Vav', 'Ahu', 'Pumps Pmu']
+      const mock = {
+        type:'building',
+        name: 'Building-3',
+        items:[]
+      }
+      for(i=0; i<5;i++){
+        const equip = {
+          type:'equipments',
+          name : `${equips[Math.floor(Math.random()*(4 - 0 + 1)+ 0)]}-${i}`,
+          items:[]
+        }
+        for(j=0;j<10;j++){
+          equip.items.push({
+            type:'sub-equipment',
+            name:`AUH-${i}-${j}`
+          })
+        }
+        mock.items.push(equip);
+      }
 
       if (window.App) {
-        App.init(data, container);
+        // App.init(data, container);
         //Mock data for development purpose
-        // App.init({...data, sider:[...data.sider, mock]}, container);
+        App.init({...data, sider:[...data.sider, mock]}, container);
       } else {
         throw new Error("App script not initialized.");
       }

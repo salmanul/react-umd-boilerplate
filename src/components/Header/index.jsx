@@ -24,7 +24,7 @@ export const HeaderCustom = ({ breadCrumb, actions = [], onActionClick }) => {
           )}
           {item?.type === "button" && (
             <Tooltip key={item?.name} title={item?.name}>
-              <Button onClick={onClick(item)} icon={<Icon width={24} height={24} url={item?.icon} />} type="link" />
+              <Button onClick={onClick(item)} icon={<Icon width={15} height={15} url={item?.icon} />} type="link" />
             </Tooltip>
           )}
         </>
@@ -33,13 +33,12 @@ export const HeaderCustom = ({ breadCrumb, actions = [], onActionClick }) => {
   );
   return (
     <Header
-      className="site-layout-sub-header-background"
-      style={{ padding: 0 }}
+      className="App__header"
     >
       <Row align="center">
         <Col flex="1 1 auto">{breadCrumb}</Col>
         <Col>
-          <Space split={<Divider type="vertical" />} align="center" className="header__space">
+          <Space size={0} split={<Divider className="header__divider" type="vertical" />} align="center" className="header__space">
             {actionItems}
           </Space>
         </Col>

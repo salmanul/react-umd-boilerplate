@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Menu as AntdMenu } from "antd";
+import React, { useState, useCallback, useEffect } from "react";
+import { Button, Menu as AntdMenu, Typography } from "antd";
 import {
   UploadOutlined,
   UserOutlined,
@@ -9,8 +9,8 @@ import { Icon } from "../Icon";
 const { SubMenu } = AntdMenu;
 
 const isLastItem = (item = {}) => (item["items"] ? false : true);
-const getCombinedKeys = (names = []) => names.filter(name => name).join(",");
-const getHomeItem = (items=[]) => items.find(x=>x["type"] === "home");
+const getCombinedKeys = (names = []) => names.filter((name) => name).join(",");
+const getHomeItem = (items = []) => items.find((x) => x["type"] === "home");
 
 export const createTreeFromString = (key = "") => {
   if (key) {
@@ -31,33 +31,48 @@ export const Menu = ({
   onOpenChange,
   onSubMenuClick,
   onMenuItemClick,
-  onHomeAction
+  onHomeAction,
+  selectedKeys,
+  onOverflowClick,
+  onSelect,
 }) => {
-  
   const onClick = (e) => {
     const { key, item } = e;
     const { extraProps } = item.props;
     onMenuItemClick(key, extraProps);
   };
 
-  useEffect(() => {
-    const homeItem = getHomeItem(data);
-    if(homeItem)onHomeAction(homeItem)
-  }, [])
+  const onOverflow = useCallback((e) => {
+    e.stopPropagation();
+    onOverflowClick && onOverflowClick(e)
+  }, []);
 
   return (
     <AntdMenu
       onClick={onClick}
-      mode="inline"
-      {...(openOnlyCurrentSubMenu && { openKeys, onOpenChange })}
-      className="sider__menu"
-      defaultSelectedKeys={defaultSelectedKeys}
+      onSelect={onSelect}
+      mode="horizontal"
+      // {...(openOnlyCurrentSubMenu && { openKeys, onOpenChange })}
+      className="header__nav-menu"
+      // defaultSelectedKeys={defaultSelectedKeys}
+      overflowedIndicator={<Button type="text" onClick={onOverflow}>View All</Button>} 
+      triggerSubMenuAction="click"
+      selectedKeys={selectedKeys}
     >
-      {getMenuItems({ items: data, onSubMenuClick })}
+      {/* {getMenuItems({ items: data, onSubMenuClick })} */}
+      {data.map((item) => (
+        <AntdMenu.Item
+          // icon={<Icon url={item?.icon} />}
+          extraProps={item}
+          key={item?.name}
+        >
+          {item?.["name"]}
+        </AntdMenu.Item>
+      ))}
     </AntdMenu>
   );
 };
-const getMenuItems = ({ items, onSubMenuClick, name='' }) => {
+const getMenuItems = ({ items, onSubMenuClick, name = "" }) => {
   const onTitleClick =
     (item = {}) =>
     (e) => {
