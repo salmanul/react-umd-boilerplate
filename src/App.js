@@ -149,11 +149,14 @@ function App({ config }) {
   const onActionClick = useCallback((e, item) => {
     triggerAction(item?.action, e, item);
     if (item?.action?.type === "openUrl") {
-      // setSelectedKeys([item?.name]); //update breadcrumb
+      //setSelectedKeys([item?.name]); //update breadcrumb
       // setCarousalSelected([]); //clear selected carousal
       // setOpenKeys([item?.name]); // update menu openKeys for sub menu
       //Clear equipments list
       // setSubEquipments([]);
+
+    //clear all child tree
+    setBuilding(null);
     }
   }, []);
 
@@ -207,6 +210,7 @@ function App({ config }) {
         <Layout className="layout__content-wrapper">
           <NavHeader
             list={sider}
+            selectedBuilding={building?.name}
             menu={
               <Menu
                 theme={theme}
@@ -238,7 +242,7 @@ function App({ config }) {
                 />
               )}
               <Content>
-                <Row style={{ height: "100%" }} className="App__flex-dir-col">
+                <Row style={{ height: "100%" }} className="App__flex-dir-col nav-header__sub-equipment">
                   <Col>
                     {subEquipments && subEquipments.length>0 && ( 
                       <Menu
