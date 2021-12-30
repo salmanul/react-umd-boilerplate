@@ -1,28 +1,18 @@
 import React, { useCallback, useState, useMemo, useEffect } from "react";
 import "./App.css";
 import {
-  Breadcrumb,
   Layout,
-  Space,
-  Tooltip,
   Button,
-  Typography,
   Row,
   Col,
-  Divider,
-  Select,
-  Tabs,
   Modal,
   List,
 } from "antd";
 import { Icon } from "./components/Icon";
-import { RightOutlined } from "@ant-design/icons";
 
 import { Menu, createTreeFromString } from "./components/Menu";
 import { IFrame } from "./components/IFrame";
-import { Carousal } from "./components/Carousal";
 import { HeaderCustom } from "./components/Header";
-import Logo from "./images/logo.png";
 import { Banner } from "./components/Banner";
 import { NavHeader } from "./components/Header/NavHeader";
 import { Sider } from "./components/Sider";
@@ -34,25 +24,13 @@ function App({ config }) {
   const [theme, setTheme] = useState("light");
   const [iframeUrl, setIframeUrl] = useState(homeUrl);
   const [isVisible, setIsVisible] = useState(false);
-
   const [building, setBuilding] = useState(null);
   const [equipment, setEquipment] = useState([]);
-
-  // const [subEquipments, setSubEquipments] = useState([]);
-
   const [collapsed, setCollapsed] = useState(false);
-  // const [selectedKeys, setSelectedKeys] = useState([""]);
-  const [carousalSelected, setCarousalSelected] = useState([""]);
 
   const [selectedKeysEquipment, setSelectedKeysEquipment] = useState([]);
   const [selectedKeysSubEquipment, setSelectedKeysSubEquipment] = useState([]);
-  // const defaultSelectedKeys = ["Home"];
-
-  // const onOpenChange = (keys) => {
-  //   const latestOpenKey = keys.find((key) => openKeys.indexOf(key) === -1);
-  //   setOpenKeys(latestOpenKey ? createTreeFromString(latestOpenKey) : keys);
-  // };
-
+ 
   const equipments = useMemo(() => {
     if (building) return building?.items ?? [];
   }, [building]);
@@ -69,25 +47,12 @@ function App({ config }) {
     if (equipment) return equipment?.items ?? [];
   }, [equipment]);
 
-  // const onSubMenuClick = useCallback((e, item) => {
-  //   const { key } = e;
-  //   console.log(key);
-  //   //Update Breadcrumbs
-  //   setSelectedKeys(key.split(","));
-  //   setCarousalSelected([]);
-  //   //Trigger action if exist for the item
-  //   triggerAction(item?.action);
-  //   // Set all sub-equipements list if type equals equipments
-  //   if (item?.["type"] === "equipments") {
-  //     setSubEquipments(item?.["items"]);
-  //   } else setSubEquipments([]);
-  // }, []);
-
   const executeCallback = (fn, args) => {
     if (fn) {
       fn.apply(this, args);
     }
   };
+
   const onCloseModel = useCallback(() => {
     setIsVisible(false);
   }, []);
@@ -115,46 +80,18 @@ function App({ config }) {
   };
 
   const onMenuItemClick = useCallback((key, item) => {
-    console.log("onMenuItemClick", key, item);
-    //Update Breadcrumbs
-    // setSelectedKeys(key.split(","));
-    // setCarousalSelected([]);
     //Trigger action if exist for the item
     triggerAction(item?.action);
-    //Clear equipments list
-    // setSubEquipments([]);
     if (item?.type === "equipments") setEquipment(item);
-  }, []);
-
-  const changeTheme = useCallback((value) => {
-    setTheme(value ? "dark" : "light");
   }, []);
 
   const onCollapse = useCallback((value) => {
     setCollapsed(value);
   }, []);
 
-  // const onCarousalItemClick = useCallback((item, e) => {
-  //   e.preventDefault();
-  //   triggerAction(item?.action);
-  //   //Update breadcrumb
-  //   setCarousalSelected([item?.title || item?.name]);
-  // }, []);
-
-  // const onHomeAction = useCallback((item) => {
-  //   triggerAction(item?.action);
-  //   // setSelectedKeys([item?.name]);
-  // }, []);
-
   const onActionClick = useCallback((e, item) => {
     triggerAction(item?.action, e, item);
     if (item?.action?.type === "openUrl") {
-      //setSelectedKeys([item?.name]); //update breadcrumb
-      // setCarousalSelected([]); //clear selected carousal
-      // setOpenKeys([item?.name]); // update menu openKeys for sub menu
-      //Clear equipments list
-      // setSubEquipments([]);
-
     //clear all child tree
     setBuilding(null);
     }
@@ -169,7 +106,6 @@ function App({ config }) {
   }, []);
 
   const onOverflowClick = (e) => {
-    // console.log(e);
     onViewAll();
   };
 
@@ -190,18 +126,6 @@ function App({ config }) {
   return (
     <Layout style={{ minHeight: "100vh" }} className="App__layout">
       <HeaderCustom
-        // breadCrumb={
-        //   <Breadcrumb
-        //     separator={<RightOutlined className="breadcrumb__seperator" />}
-        //     className="header__breadcrumb"
-        //   >
-        //     {[...selectedKeys, ...carousalSelected].map((path) => (
-        //       <Breadcrumb.Item className="header__breadcrumb-item">
-        //         {path}
-        //       </Breadcrumb.Item>
-        //     ))}
-        //   </Breadcrumb>
-        // }
         actions={header}
         onActionClick={onActionClick}
       />
@@ -215,13 +139,7 @@ function App({ config }) {
               <Menu
                 theme={theme}
                 data={equipments}
-                // openOnlyCurrentSubMenu={config?.openOnlyCurrentSubMenu ?? true}
-                // defaultSelectedKeys={defaultSelectedKeys}
-                // openKeys={openKeys}
-                // onOpenChange={onOpenChange}
-                // onSubMenuClick={onSubMenuClick}
                 onMenuItemClick={onMenuItemClick}
-                // onHomeAction={onHomeAction}
                 onSelect={onSelectEquipment}
                 selectedKeys={selectedKeysEquipment}
               />
@@ -248,13 +166,7 @@ function App({ config }) {
                       <Menu
                         theme={theme}
                         data={subEquipments}
-                        // openOnlyCurrentSubMenu={config?.openOnlyCurrentSubMenu ?? true}
-                        // defaultSelectedKeys={defaultSelectedKeys}
-                        // openKeys={openKeys}
-                        // onOpenChange={onOpenChange}
-                        // onSubMenuClick={onSubMenuClick}
                         onMenuItemClick={onMenuItemClick}
-                        // onHomeAction={onHomeAction}
                         onOverflowClick={onOverflowClick}
                         selectedKeys={selectedKeysSubEquipment}
                         onSelect={onSelectSubEquipment}
@@ -267,7 +179,7 @@ function App({ config }) {
                 </Row>
               </Content>
               <Modal
-                title="List"
+                title="All"
                 footer={null}
                 visible={isVisible}
                 className="App__modal-list"
@@ -296,9 +208,11 @@ function App({ config }) {
                   renderItem={(item) => (
                     <List.Item>
                       <Button
+                      type="text"
                         size="large"
                         icon={<Icon defaultIcon={false} url={item?.icon} />}
                         onClick={onListItemClick(item)}
+                        className="modal__list-item-btn"
                       >
                         {item?.name}
                       </Button>

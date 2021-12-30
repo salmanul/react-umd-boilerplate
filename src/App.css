@@ -133,7 +133,7 @@
 .menu__overflow-btn {
   color: white;
 }
-.header__nav-menu .ant-menu-item .anticon + span{
+.header__nav-menu .ant-menu-item .anticon + span {
   margin-left: 0;
 }
 .header__nav-menu .ant-menu-item .anticon {
@@ -145,7 +145,7 @@
   opacity: 0.3;
   height: 100%;
   width: 100%;
-  padding: 10px 15px;;
+  padding: 10px 15px;
 }
 
 .header__nav-menu .ant-menu-item,
@@ -173,6 +173,15 @@
 }
 .App__modal-list {
   max-width: 800px;
+}
+.modal__list-item-btn {
+  border:none;
+  background: linear-gradient( 90deg, rgba(139, 36, 51, 0.6040616930365896) 0%, rgb(139, 36, 51) 83% );
+color: white;
+}
+.modal__list-item-btn:hover{
+  background: linear-gradient( 90deg, rgba(139, 36, 51, 0.6040616930365896) 0%, rgb(139, 36, 51) 83% );
+  color: white;
 }
 .header__breadcrumb {
   margin: 20px;
