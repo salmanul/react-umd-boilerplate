@@ -39,7 +39,7 @@
   left: 100%;
   color: white;
   z-index: 1;
-  padding: 10px 5px;
+  padding: 20px 5px 20px 5px;
   background: var(--color-primary-ibms-gradient);
   border-top-right-radius: 0.5rem;
   border-bottom-right-radius: 0.5rem;
@@ -84,6 +84,9 @@
   background: transparent;
 }
 /* Logo Container */
+.ant-layout-sider-children{
+  border-right: 1px solid #8b2333;
+}
 .App__layout .logocontainer {
   display: flex;
   justify-content: center;
@@ -178,6 +181,9 @@
   border:none;
   background: linear-gradient( 90deg, rgba(139, 36, 51, 0.6040616930365896) 0%, rgb(139, 36, 51) 83% );
 color: white;
+width: 100px;
+padding-left: 2px;
+padding-right: 2px;
 }
 .modal__list-item-btn:hover{
   background: linear-gradient( 90deg, rgba(139, 36, 51, 0.6040616930365896) 0%, rgb(139, 36, 51) 83% );
