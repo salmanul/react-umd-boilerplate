@@ -20,7 +20,7 @@ import { Sider } from "./components/Sider";
 const { Content, Footer } = Layout;
 
 function App({ config }) {
-  const { sider, footerText, header, homeUrl } = config; //config from App.init
+  const { sider, footerText, header, homeUrl, ibmsLogo } = config; //config from App.init
   const [theme, setTheme] = useState("light");
   const [iframeUrl, setIframeUrl] = useState(homeUrl);
   const [isVisible, setIsVisible] = useState(false);
@@ -129,7 +129,7 @@ function App({ config }) {
         actions={header}
         onActionClick={onActionClick}
       />
-      <Banner />
+      <Banner ibmsLogo={ibmsLogo} />
       <Content className="layout__content">
         <Layout className="layout__content-wrapper">
           <NavHeader
@@ -178,6 +178,16 @@ function App({ config }) {
                   </Col>
                 </Row>
               </Content>
+              {building && (
+                <Sider  
+                  selectedBuilding={building}
+                  triggerTitle={building?.name}
+                  collapsed={collapsed}
+                  onCollapse={onCollapse}
+                  iframeUrl={building?.rightPanelIframeUrl ?? ""}>  
+                    </Sider>
+                  )}
+
               <Modal
                 title="All"
                 footer={null}
