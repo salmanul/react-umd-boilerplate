@@ -189,7 +189,7 @@ function App({ config }) {
               {building && selectedKeysSubEquipment && selectedKeysSubEquipment.length > 0 &&(
                 <Sider  
                   selectedBuilding={building}
-                  triggerTitle={building?.name}
+                  triggerTitle={building?.rightPanelname}
                   collapsed={collapsed.right}
                   onCollapse={onCollapse('right')}
                   iframeUrl={building?.rightPanelIframeUrl ?? ""}
