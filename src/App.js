@@ -43,6 +43,11 @@ function App({ config }) {
 
   }, [building]);
 
+  useEffect(() => {
+    //clear sub equipments
+    setSelectedKeysSubEquipment([]);
+  }, [selectedKeysEquipment]);
+
   const subEquipments = useMemo(() => {
     if (equipment) return equipment?.items ?? [];
   }, [equipment]);
@@ -149,6 +154,7 @@ function App({ config }) {
           />
           <Content>
             <Layout style={{ height: "100%" }}>
+              {/** LEFT SIDER */}
               {building && (
                 <Sider
                   selectedBuilding={building}
@@ -179,7 +185,8 @@ function App({ config }) {
                   </Col>
                 </Row>
               </Content>
-              {building && (
+               {/** RIGHT SIDER */}
+              {building && selectedKeysSubEquipment && selectedKeysSubEquipment.length > 0 &&(
                 <Sider  
                   selectedBuilding={building}
                   triggerTitle={building?.name}
