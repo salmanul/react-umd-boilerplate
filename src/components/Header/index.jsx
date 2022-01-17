@@ -24,7 +24,7 @@ export const HeaderCustom = ({ breadCrumb, actions = [], onActionClick }) => {
           )}
           {item?.type === "button" && (
             <Tooltip key={item?.name} title={item?.name}>
-              <Button onClick={onClick(item)} icon={<Icon width={15} height={15} url={item?.icon} />} type="link" />
+              <Button onClick={onClick(item)} icon={<Icon width={25} height={25} url={item?.icon} />} type="link" />
             </Tooltip>
           )}
         </>
