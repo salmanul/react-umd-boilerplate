@@ -26,7 +26,7 @@ function App({ config }) {
   const [isVisible, setIsVisible] = useState(false);
   const [building, setBuilding] = useState(null);
   const [equipment, setEquipment] = useState([]);
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState({left:false, right:false});
 
   const [selectedKeysEquipment, setSelectedKeysEquipment] = useState([]);
   const [selectedKeysSubEquipment, setSelectedKeysSubEquipment] = useState([]);
@@ -85,8 +85,8 @@ function App({ config }) {
     if (item?.type === "equipments") setEquipment(item);
   }, []);
 
-  const onCollapse = useCallback((value) => {
-    setCollapsed(value);
+  const onCollapse = useCallback((position)=>(value) => {
+    setCollapsed({...collapsed, [position]:value});
   }, []);
 
   const onActionClick = useCallback((e, item) => {
@@ -154,8 +154,8 @@ function App({ config }) {
                   selectedBuilding={building}
                   logo={building?.image}
                   triggerTitle={building?.name}
-                  collapsed={collapsed}
-                  onCollapse={onCollapse}
+                  collapsed={collapsed?.left}
+                  onCollapse={onCollapse('left')}
                   theme={theme}
                   contentHtml={building?.contentHtml}
                 />
@@ -183,8 +183,8 @@ function App({ config }) {
                 <Sider  
                   selectedBuilding={building}
                   triggerTitle={building?.name}
-                  collapsed={collapsed}
-                  onCollapse={onCollapse}
+                  collapsed={collapsed.right}
+                  onCollapse={onCollapse('right')}
                   iframeUrl={building?.rightPanelIframeUrl ?? ""}
                   triggerPosition="left"
                   />
