@@ -55,21 +55,33 @@ export const Menu = ({
       // {...(openOnlyCurrentSubMenu && { openKeys, onOpenChange })}
       className="header__nav-menu"
       // defaultSelectedKeys={defaultSelectedKeys}
-      overflowedIndicator={
-        <Button type="text" className="menu__overflow-btn" onClick={onOverflow}>
-          View All
-        </Button>
-      }
+      {...(onOverflowClick && {
+        overflowedIndicator: (
+          <Button
+            type="text"
+            className="menu__overflow-btn"
+            onClick={onOverflow}
+          >
+            View All
+          </Button>
+        ),
+      })}
       triggerSubMenuAction="click"
       selectedKeys={selectedKeys}
     >
       {/* {getMenuItems({ items: data, onSubMenuClick })} */}
       {data.map((item) => (
         <AntdMenu.Item
-          icon={<Icon defaultIcon={false} width={""} height={'100%'} url={item?.icon} />}
+          icon={
+            <Icon
+              defaultIcon={false}
+              width={""}
+              height={"100%"}
+              url={item?.icon}
+            />
+          }
           extraProps={item}
           key={item?.name}
-          
         >
           {item?.["name"]}
         </AntdMenu.Item>

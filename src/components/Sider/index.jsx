@@ -13,10 +13,12 @@ export const Sider = ({
   contentHtml,
   iframeUrl,
   onCollapse,
+  triggerPosition = "right",
 }) => {
   const onTrigger = useCallback(() => {
     onCollapse(!collapsed);
   }, [collapsed]);
+
   return (
     <span style={{ position: "relative" }}>
       <SiderAntD
@@ -46,7 +48,7 @@ export const Sider = ({
         {contentHtml && renderHTML(contentHtml)}
         {iframeUrl && <IFrame url={iframeUrl} />}
       </SiderAntD>
-      <div onClick={onTrigger} className="sider__custom-trigger">
+      <div onClick={onTrigger} className={`sider__custom-trigger sider__custom-trigger--${triggerPosition}`}>
         <p>{triggerTitle || "HIDE/SHOW"}</p>
       </div>
     </span>

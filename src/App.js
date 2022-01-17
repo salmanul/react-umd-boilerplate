@@ -20,13 +20,13 @@ import { Sider } from "./components/Sider";
 const { Content, Footer } = Layout;
 
 function App({ config }) {
-  const { sider, footerText, header, homeUrl, ibmsLogo } = config; //config from App.init
+  const { sider, footerText, header, homeUrl, ibmsLogo, bannerContentUrl } = config; //config from App.init
   const [theme, setTheme] = useState("light");
   const [iframeUrl, setIframeUrl] = useState(homeUrl);
   const [isVisible, setIsVisible] = useState(false);
   const [building, setBuilding] = useState(null);
   const [equipment, setEquipment] = useState([]);
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState({left:false, right:false});
 
   const [selectedKeysEquipment, setSelectedKeysEquipment] = useState([]);
   const [selectedKeysSubEquipment, setSelectedKeysSubEquipment] = useState([]);
@@ -85,8 +85,8 @@ function App({ config }) {
     if (item?.type === "equipments") setEquipment(item);
   }, []);
 
-  const onCollapse = useCallback((value) => {
-    setCollapsed(value);
+  const onCollapse = useCallback((position)=>(value) => {
+    setCollapsed({...collapsed, [position]:value});
   }, []);
 
   const onActionClick = useCallback((e, item) => {
@@ -129,7 +129,7 @@ function App({ config }) {
         actions={header}
         onActionClick={onActionClick}
       />
-      <Banner ibmsLogo={ibmsLogo} />
+      <Banner ibmsLogo={ibmsLogo} bannerContent={<IFrame url={bannerContentUrl} />} />
       <Content className="layout__content">
         <Layout className="layout__content-wrapper">
           <NavHeader
@@ -140,6 +140,7 @@ function App({ config }) {
                 theme={theme}
                 data={equipments}
                 onMenuItemClick={onMenuItemClick}
+                onOverflowClick={null}
                 onSelect={onSelectEquipment}
                 selectedKeys={selectedKeysEquipment}
               />
@@ -153,8 +154,8 @@ function App({ config }) {
                   selectedBuilding={building}
                   logo={building?.image}
                   triggerTitle={building?.name}
-                  collapsed={collapsed}
-                  onCollapse={onCollapse}
+                  collapsed={collapsed?.left}
+                  onCollapse={onCollapse('left')}
                   theme={theme}
                   contentHtml={building?.contentHtml}
                 />
@@ -182,12 +183,13 @@ function App({ config }) {
                 <Sider  
                   selectedBuilding={building}
                   triggerTitle={building?.name}
-                  collapsed={collapsed}
-                  onCollapse={onCollapse}
-                  iframeUrl={building?.rightPanelIframeUrl ?? ""}>  
-                    </Sider>
+                  collapsed={collapsed.right}
+                  onCollapse={onCollapse('right')}
+                  iframeUrl={building?.rightPanelIframeUrl ?? ""}
+                  triggerPosition="left"
+                  />
                   )}
-
+                  
               <Modal
                 title="All"
                 footer={null}
