@@ -58,7 +58,6 @@
           {
             name: "Building-1",
             type: "building",
-            rightPanelname: "Building-23",
             icon: "./icons/building.svg", // if not provided, default icon will render
             action: {
               event: "onClick",
@@ -67,7 +66,7 @@
             },
             image:'./images/building-1.png',
             contentHtml:"<div><h3>Zone-1 & 2</h3><ul><li>lorem ipsum</li><ul></div>",
-            rightPanelIframeUrl:"https://<right-panel-iframe-url>",
+            // rightPanelIframeUrl:"https://<right-panel-iframe-url>",
             items: [
               {
                 type: "equipments",
@@ -82,6 +81,7 @@
                   {
                     type: "sub-equipment",
                     name: "AUH-1",
+                    label:"AUH-1-full-label",
                     description: "Lorem ipsum",
                     // icon: "./icons/ahu.svg",
                     action: {
@@ -89,6 +89,7 @@
                       type: "openUrl",
                       url: "https://AUH-1-sub-equipments",
                     },
+                    rightPanelIframeUrl:"https://<right-panel-iframe-url-auh-1>"
                   },
                   {
                     type: "sub-equipment",
@@ -193,7 +194,6 @@
       const mock = {
         type:'building',
         name: 'Building-3',
-        rightPanelname: "Building-23",
         items:[]
       }
       for(i=0; i<5;i++){
