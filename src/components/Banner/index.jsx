@@ -1,9 +1,8 @@
 import React from 'react';
 import {Row, Col} from 'antd';
 
-import deptPublicWorks from '../../images/dept-public-works.png';
 
-export const Banner = ({ibmsLogo, bannerContent})=>(
+export const Banner = ({ibmsLogo, bannerContent, dpwLogo})=>(
     <Row className='App__banner'>
       <Col md={4} flex={1}>
         <img className="App__banner-logo" alt='ibms' src={ibmsLogo}/>
@@ -12,7 +11,7 @@ export const Banner = ({ibmsLogo, bannerContent})=>(
           {bannerContent}
       </Col>
       <Col md={4}>
-        <img className="App__banner-logo" alt="dept-public-works" src={deptPublicWorks}/>
+        <img className="App__banner-logo" alt="dept-public-works" src={dpwLogo}/>
       </Col>
     </Row>
 )

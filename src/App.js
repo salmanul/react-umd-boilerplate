@@ -20,7 +20,7 @@ import { Sider } from "./components/Sider";
 const { Content, Footer } = Layout;
 
 function App({ config }) {
-  const { sider, footerText, header, homeUrl, ibmsLogo, bannerContentUrl } = config; //config from App.init
+  const { sider, footerText, header, homeUrl, ibmsLogo, bannerContentUrl, dpwLogo } = config; //config from App.init
   const [theme, setTheme] = useState("light");
   const [iframeUrl, setIframeUrl] = useState(homeUrl);
   const [isVisible, setIsVisible] = useState(false);
@@ -138,7 +138,7 @@ function App({ config }) {
         actions={header}
         onActionClick={onActionClick}
       />
-      <Banner ibmsLogo={ibmsLogo} bannerContent={<IFrame url={bannerContentUrl} />} />
+      <Banner ibmsLogo={ibmsLogo} bannerContent={<IFrame url={bannerContentUrl} />} dpwLogo={dpwLogo} />
       <Content className="layout__content">
         <Layout className="layout__content-wrapper">
           <NavHeader
