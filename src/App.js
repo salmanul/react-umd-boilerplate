@@ -26,6 +26,7 @@ function App({ config }) {
   const [isVisible, setIsVisible] = useState(false);
   const [building, setBuilding] = useState(null);
   const [equipment, setEquipment] = useState([]);
+  const [subEquipment, setSubEquipment] = useState(null);
   const [collapsed, setCollapsed] = useState({left:false, right:false});
 
   const [selectedKeysEquipment, setSelectedKeysEquipment] = useState([]);
@@ -38,6 +39,7 @@ function App({ config }) {
   useEffect(() => {
     //clear all child tree
     setEquipment([]);
+    setSubEquipment(null);
     setSelectedKeysEquipment([]);
     setSelectedKeysSubEquipment([]);
 
@@ -46,6 +48,7 @@ function App({ config }) {
   useEffect(() => {
     //clear sub equipments
     setSelectedKeysSubEquipment([]);
+    setSubEquipment(null);
   }, [selectedKeysEquipment]);
 
   const subEquipments = useMemo(() => {
@@ -88,6 +91,7 @@ function App({ config }) {
     //Trigger action if exist for the item
     triggerAction(item?.action);
     if (item?.type === "equipments") setEquipment(item);
+    if (item?.type === "sub-equipment") setSubEquipment(item);
   }, []);
 
   const onCollapse = useCallback((position)=>(value) => {
@@ -186,13 +190,13 @@ function App({ config }) {
                 </Row>
               </Content>
                {/** RIGHT SIDER */}
-              {building && selectedKeysSubEquipment && selectedKeysSubEquipment.length > 0 &&(
+              {subEquipment && (
                 <Sider  
                   selectedBuilding={building}
-                  triggerTitle={building?.name}
+                  triggerTitle={subEquipment?.label ?? 'label'}
                   collapsed={collapsed.right}
                   onCollapse={onCollapse('right')}
-                  iframeUrl={building?.rightPanelIframeUrl ?? ""}
+                  iframeUrl={subEquipment?.rightPanelIframeUrl ?? ""}
                   triggerPosition="left"
                   />
                   )}
