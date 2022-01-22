@@ -121,7 +121,8 @@ function App({ config }) {
   const onListItemClick = (item) => (e) => {
     onCloseModel();
     setSelectedKeysSubEquipment([item?.name]);
-    triggerAction(item?.action)
+    setSubEquipment(item);
+    triggerAction(item?.action);
   };
 
   const onSelectEquipment = useCallback(({selectedKeys}) => {
